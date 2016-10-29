@@ -15,7 +15,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   buttonState = digitalRead(buttonPin);
 
-  if (buttonState == HIGH) 
+  if (debounceButton(buttonState) == HIGH) 
   {
     digitalWrite(ledPin, HIGH);
   }
@@ -24,3 +24,13 @@ void loop() {
     digitalWrite(ledPin, LOW);
   }
 }
+
+bool debounceButton(bool state) {
+  bool stateNow = digitalRead(buttonPin);
+  if(state != stateNow) {
+    delay(20);
+    stateNow = digitalRead(buttonPin);
+  }
+  return stateNow;
+}
+
